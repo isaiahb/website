@@ -11,6 +11,11 @@ export default {
 			console.log(x, y);
 			return {x, y};
 		}
+	},
+	data() {
+		return {
+			name: "isaiah"
+		}
 	}
 };
 

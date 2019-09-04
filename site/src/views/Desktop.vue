@@ -7,6 +7,7 @@ import Contact from "@/components/windows/Contact";
 import Portfolio from "@/components/windows/Portfolio";
 import OpenUrl from "@/components/OpenUrl";
 import OpenWindow from "@/components/OpenWindow";
+import Sticky from "@/components/Sticky";
 
 export default {
 	name: "Desktop",
@@ -18,7 +19,8 @@ export default {
 		Contact,
 		OpenUrl,
 		OpenWindow,
-		Portfolio
+		Portfolio,
+		Sticky
 	}
 };
 
@@ -45,6 +47,13 @@ export default {
 		<Icon icon="linkedin" name="LinkedIn" stateName="linkedIn">
 			<OpenUrl url="https://www.linkedin.com/in/isaiah-ballah/"/>
 		</Icon>
+
+		<Sticky>
+			<br/>
+			<h5>Hello World</h5>
+			<p>Welcome to my personal site</p>
+			
+		</Sticky>
 
 		<Contact></Contact>
 		<Terminal/>

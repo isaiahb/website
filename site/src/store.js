@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 //defaults
-var terminal = {open: true, x:450, y:560}
+var terminal = {open: false, x:450, y:560}
 var portfolio = {open: true, x: 50, y:560};
 var contact = {open: false, x: 150, y: 560};
 var github = {open: false, x: 250, y:560};

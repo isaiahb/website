@@ -1,39 +1,22 @@
 <script>
 export default {
-	name: "HelloWorld",
-	props: {
-		title: {
-			type: String,
-			required: false,
-			default: "Isaiah - Ballah —- Personal Site"
-		},
-		position: {
-			type: Object,
-			required: false,
-			default: {x: 60, y:60}
-		},
-		stateName: {
-			type: String,
-			required: true,
-		}
-	},
-
+	name: "Sticky",
+	props: {},
 	data() {
 		return {
-			closeButton: "",
-			minimizeButton: "",
-			expandButton: "",
-			fullScreen: false
+			// fullScreen: false
+			position: {x: 60, y: 60},
+			// visible: true
 		};
 	},
 
 	computed: {
 		visible() {
-			return this.$store.state[this.stateName].open;
+			// return this.$store.state[this.stateName].open;
 		},
 		classObject(){
 			return {
-				"fullscreen": this.fullScreen,
+				// "fullscreen": this.fullScreen,
 			}
 		}
 	},
@@ -44,7 +27,8 @@ export default {
 			this.setPosition(0, 0);
 		},
 		close() {
-			this.$store.commit("close", this.stateName);
+			// this.$store.commit("close", this.stateName);
+			console.log("Close");
 		},
 		setPosition(x, y) {
 			// if (this.fullScreen) return;
@@ -66,6 +50,10 @@ export default {
 			this.$el.style.left = x + "px";
 			this.$el.style.top = y + "px";
 		},
+		initPosition() {
+			this.$el.style.right = 0 + "px";
+			this.$el.style.top = 0 + "px";
+		},
 		getPosition() {
 			return {x: this.$el.offsetLeft, y: this.$el.offsetTop};
 		},
@@ -83,7 +71,7 @@ export default {
 			setPosition(x, y);
 
 			var offsetX = 0, offsetY  = 0;
-			elmnt.childNodes.item("window-header").onmousedown = onMouseDown;
+			elmnt.childNodes.item("note-header").onmousedown = onMouseDown;
 
 			function onMouseDown(e) {
 				if(!canDrag()) return;
@@ -116,9 +104,23 @@ export default {
 				document.onmouseup = null;
 				document.onmousemove = null;
 			}
+		},
+
+		myEventHandler() {
+			var {x, y} = this.getPosition();
+			this.setPosition(x, y);
+			console.log("sticky  event");
 		}
 	},
 
+	created() {
+		// document.addEventListener("resize", this.myEventHandler);
+		document.body.onresize = this.myEventHandler;
+		console.log("yay");
+	},
+	destroyed() {
+		// document.removeEventListener("resize", this.myEventHandler);
+	},
 
 	mounted() {
 		this.dragElement(this.$el);
@@ -129,17 +131,15 @@ export default {
 </script>
 
 <template>
-	<div id="window" class="glow-dark" :class="classObject" v-show="visible">
-		<div id="window-header">
-			<div id="window-header-buttons">
-				<button id="close-button" class="button-red window-header-button" @click="close" @mouseover="closeButton = 'x'" @mouseleave="closeButton = ''" ><p>{{closeButton}}</p></button>
-				<button id="minimize-button" class="button-yellow window-header-button" @click="close" @mouseover="minimizeButton = '-'" @mouseleave="minimizeButton = ''"><p> {{minimizeButton}} </p></button>
-				<button id="expand-button" class="button-green window-header-button" @click="toggleFullscreen" @mouseover="expandButton = '+'" @mouseleave="expandButton = ''"><p> {{expandButton}} </p></button>
+	<div id="note" class="glow-dark" :class="classObject" vb-show="visible">
+		<div id="note-header">
+			<div id="note-header-buttons">
+				<div id="close-button" class="button-redd note-header-button" @click="close" >x</div>
 			</div>
 
-			<h6 class="title ">{{title}}</h6>
+			<h6 class="title "> Notes </h6>
 		</div>
-		<div id="window-body" class="w-100">
+		<div id="note-body" class="w-100">
 			<slot></slot>
 		</div>
 	</div>
@@ -148,12 +148,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-	#window {
+	#note {
 		display:flex;
 		flex-direction: column;	
 		height: 300px;
-		width: 500px;
-		border-radius: 10px;
+		width: 300px;
+		// border-radius: 10px;
 		position: absolute;
 		top:10px;
 		overflow: hidden;
@@ -166,26 +166,26 @@ export default {
 		}
 	}
 
-	#window-header {
+	#note-header {
 		height: 32px;
 		width: 100%;
-		background: #D9D9D9;
-		border-top-right-radius: 10px;
-		border-top-left-radius: 10px;
+		background: #FFEF6A;
+		// border-top-right-radius: 10px;
+		// border-top-left-radius: 10px;
 		display:flex;
 		justify-content: center;
 		align-items: center;
 		align-content: center;
 		color: #262933;
 	}
-	#window-body {
-		background: white;
-		border-bottom-right-radius: 10px;
-		border-bottom-left-radius: 10px;
+	#note-body {
+		background: #FDF49C;
+		// border-bottom-right-radius: 10px;
+		// border-bottom-left-radius: 10px;
 		height: calc(100% - 32px);
 	}
 	
-	#window-header-buttons {
+	#note-header-buttons {
 		position: absolute;
 		left: 6px;
 		display:flex;
@@ -193,26 +193,24 @@ export default {
 	}
 
 	#close-button {
-		color:brown;
-	}
-	#minimize-button {
-		color: #AC6B09;
-	}
-	#expand-button {
-		color:#2A6218;
+		color:gray;
+		&:hover {
+			color:brown;
+			cursor: pointer;
+		}
 	}
 
-	.window-header-button {
+	.note-header-button {
 		position: relative;
 		width: 20px;
 		height: 20px;
-		border-radius: 10px;
+		// border-radius: 10px;
 		text-align: center;
 		padding:0px;
 		margin-right:5px;
 	}
 
-	.window-header-button p {
+	.note-header-button p {
 		margin: 0px;
 		width:100%;
 		height:100%;
