@@ -6,6 +6,14 @@ handlers:
   upload: site/public/index.html
   secure: always
 
+- url: site/public/(.*)
+  static_files: site/public/\1
+  upload: site/public/(.*)
+
+- url: public/(.*)
+  static_files: site/public/\1
+  upload: site/public/(.*)
+
 - url: /(.*)
   static_files: site/public/\1
   upload: site/public/(.*)
