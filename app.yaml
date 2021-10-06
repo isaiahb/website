@@ -2,18 +2,18 @@ runtime: nodejs14
 
 handlers:
 - url: /
-  static_files: site/public/index.html
-  upload: site/public/index.html
+  static_files: site/dist/index.html
+  upload: site/dist/index.html
   secure: always
 
-- url: /site/public/(.*)
-  static_files: site/public/\1
-  upload: site/public/(.*)
+- url: /site/dist/(.*)
+  static_files: site/dist/\1
+  upload: site/dist/(.*)
 
-- url: /public/(.*)
-  static_files: site/public/\1
-  upload: site/public/(.*)
+- url: /dist/(.*)
+  static_files: site/dist/\1
+  upload: site/dist/(.*)
 
 - url: /(.*)
-  static_files: site/public/\1
-  upload: site/public/(.*)
+  static_files: site/dist/\1
+  upload: site/dist/(.*)
