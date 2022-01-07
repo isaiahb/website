@@ -4,20 +4,18 @@ export default {
 	props: {},
 	data() {
 		return {
-			// fullScreen: false
-			position: {x: 60, y: 60},
-			// visible: true
+			position: {x: 0, y: 0},
+			sticky: true,
+			isVisible: true
 		};
 	},
 
 	computed: {
 		visible() {
-			// return this.$store.state[this.stateName].open;
+			return this.$store.state.sticky.open;
 		},
 		classObject(){
-			return {
-				// "fullscreen": this.fullScreen,
-			}
+			return {}
 		}
 	},
 
@@ -27,32 +25,39 @@ export default {
 			this.setPosition(0, 0);
 		},
 		close() {
-			// this.$store.commit("close", this.stateName);
-			console.log("Close");
+			this.$store.commit("close", "sticky");
 		},
 		setPosition(x, y) {
-			// if (this.fullScreen) return;
-			if (this.fullScreen) {
-				x = 0;
-				y = 0;
-			}
 
 			var parentWidth = this.$el.parentElement.offsetWidth;
 			var parentHeight = this.$el.parentElement.offsetHeight;
 			var width = this.$el.offsetWidth;
 			var height = this.$el.offsetHeight;
+			var maxWidth = parentWidth - width;
+			var maxHeight = parentHeight - height;
 			
-			x = x >= 0 ? x : 1;
-			y = y >= 0 ? y : 1;
-			x = x <= parentWidth - width ? x : parentWidth - width - 1;
-			y = y <= parentHeight - height ? y : parentHeight - height - 1;
+			if (this.sticky) x = maxWidth;
 
+
+			x = x >= 0 ? x : 0;
+			y = y >= 0 ? y : 0;
+			x = x <= maxWidth ? x : maxWidth;
+			y = y <= maxHeight ? y : maxHeight;
+			if (x == maxWidth) {
+				this.stick();
+			}
 			this.$el.style.left = x + "px";
 			this.$el.style.top = y + "px";
 		},
 		initPosition() {
 			this.$el.style.right = 0 + "px";
 			this.$el.style.top = 0 + "px";
+		},
+		unstick() {
+			this.sticky = false;
+		},
+		stick() {
+			this.sticky = true;
 		},
 		getPosition() {
 			return {x: this.$el.offsetLeft, y: this.$el.offsetTop};
@@ -67,6 +72,7 @@ export default {
 		dragElement(elmnt) {
 			var setPosition = this.setPosition;
 			var canDrag = this.canDrag;
+			var unstick = this.unstick;
 			var {x, y} = this.position;
 			setPosition(x, y);
 
@@ -88,6 +94,7 @@ export default {
 				// call a function whenever the cursor moves:
 				document.onmousemove = onMouseMove;
 				document.onmouseup = closeDragElement;
+
 			}
 
 			function onMouseMove(e) {
@@ -96,6 +103,7 @@ export default {
 
 				var x = (e.pageX + offsetX);
 				var y = (e.pageY + offsetY);// - 50);
+				unstick();
 				setPosition(x, y);
 			}
 
@@ -109,35 +117,37 @@ export default {
 		myEventHandler() {
 			var {x, y} = this.getPosition();
 			this.setPosition(x, y);
-			console.log("sticky  event");
 		}
 	},
 
 	created() {
-		// document.addEventListener("resize", this.myEventHandler);
-		document.body.onresize = this.myEventHandler;
-		console.log("yay");
+		window.addEventListener("resize", this.myEventHandler);
 	},
 	destroyed() {
-		// document.removeEventListener("resize", this.myEventHandler);
+		window.removeEventListener("resize", this.myEventHandler);
 	},
 
 	mounted() {
 		this.dragElement(this.$el);
 	},
+	updated()  {
+		console.log("cool");
+		var {x, y} = this.getPosition();
+		this.setPosition(x, y);
+	}
 
 };
 
 </script>
 
 <template>
-	<div id="note" class="glow-dark" :class="classObject" vb-show="visible">
+	<div id="note" class="glow-dark" :class="classObject" v-show="visible">
 		<div id="note-header">
 			<div id="note-header-buttons">
 				<div id="close-button" class="button-redd note-header-button" @click="close" >x</div>
 			</div>
 
-			<h6 class="title "> Notes </h6>
+			<h6 class="title "> Help - Notes </h6>
 		</div>
 		<div id="note-body" class="w-100">
 			<slot></slot>
@@ -170,8 +180,6 @@ export default {
 		height: 32px;
 		width: 100%;
 		background: #FFEF6A;
-		// border-top-right-radius: 10px;
-		// border-top-left-radius: 10px;
 		display:flex;
 		justify-content: center;
 		align-items: center;
@@ -180,8 +188,6 @@ export default {
 	}
 	#note-body {
 		background: #FDF49C;
-		// border-bottom-right-radius: 10px;
-		// border-bottom-left-radius: 10px;
 		height: calc(100% - 32px);
 	}
 	
@@ -189,11 +195,16 @@ export default {
 		position: absolute;
 		left: 6px;
 		display:flex;
-
 	}
 
 	#close-button {
 		color:gray;
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+		
 		&:hover {
 			color:brown;
 			cursor: pointer;
@@ -204,7 +215,6 @@ export default {
 		position: relative;
 		width: 20px;
 		height: 20px;
-		// border-radius: 10px;
 		text-align: center;
 		padding:0px;
 		margin-right:5px;

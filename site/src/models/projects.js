@@ -1,6 +1,8 @@
 var perceive = {
 	name: "Perceive",
-	info: "Full stack software developer"
+	icon: "perceive",
+	info: "Full stack software developer",
+	hint: "Working as a fullstack software developer at Perceive - a software startup "
 }
 var achieve = {
 	name: "Achieve",
@@ -9,7 +11,9 @@ var achieve = {
 	"Achieve is a graph based project managment system " +
 	"that increases productivity amongst software teams "+
 	"by organizing a project into tasks, and showing each "+
-	"tasks dependancies in a graph to dispaly open and blocked tasks."
+	"tasks dependancies in a graph to dispaly open and blocked tasks.",
+	hint: "A Graph based project management solution to visualize and allocate tasks"
+
 }
 var weLift = {
 	name: "We Lift",
@@ -17,7 +21,9 @@ var weLift = {
 	info: "We Lift is a mobile app that tracks your workouts "+
 	"and has tools to help you while you workout including a " +
 	"barbell plate calculator, and 1 Rep Max Calculator. "+
-	"Created with Flutter and uses SQL Lite"
+	"Created with Flutter and uses SQL Lite",
+	hint: "A Mobile app tools to assist and track workouts"
+
 }
 
 var weBookRooms = {
@@ -28,7 +34,9 @@ var weBookRooms = {
 	"Western's newest Engineering building "+
 	"The web app uses AOUTH to require permission to  "+
 	"schedule meetings with the rooms in the engineering building on the users behalf " +
-	"Front end weeb app is made with Vue js and makes api calls to the backend made with Node js "
+	"Front end weeb app is made with Vue js and makes api calls to the backend made with Node js ",
+	hint: "Created a fullstack solution to simplify room booking process in westerns engineering building"
+
 }
 
 var ballSorter = {
@@ -38,37 +46,54 @@ var ballSorter = {
 	"I created a device that was able to distinguish gumballs from wooden balls" +
 	"With 99% accuracy "+
 	"by organizing a project into tasks, and showing each "+
-	"tasks dependancies in a graph to dispaly open and blocked tasks."
+	"tasks dependancies in a graph to dispaly open and blocked tasks.",
+	hint: "Applied image processing to controll microcontroller to sort balls"
+
 }
 var hackathons = {
-	name: "Achieve",
-	icon: "achieve",
+	name: "Hackathons",
+	icon: "hackathons",
 	info: "Created backend and frontend for Achieve MVP. "+
 	"Achieve is a graph based project managment system " +
 	"that increases productivity amongst software teams "+
 	"by organizing a project into tasks, and showing each "+
-	"tasks dependancies in a graph to dispaly open and blocked tasks."
+	"tasks dependancies in a graph to dispaly open and blocked tasks.",
+	hint: "Attended many Hackathons and created various cool projects"
+
 }
 var freelancing = {
-	name: "Achieve",
-	icon: "achieve",
+	name: "Freelance Projects",
+	icon: "freelancing",
 	info: "Created backend and frontend for Achieve MVP. "+
 	"Achieve is a graph based project managment system " +
 	"that increases productivity amongst software teams "+
 	"by organizing a project into tasks, and showing each "+
-	"tasks dependancies in a graph to dispaly open and blocked tasks."
+	"tasks dependancies in a graph to dispaly open and blocked tasks.",
+	hint: "Worked with clients to develope various websites and scripts"
+
 }
 var cheemaProduce = {
-	name: "Achieve",
-	icon: "achieve",
+	name: "Cheema  Produce",
+	icon: "cheemaproduce",
 	info: "Created backend and frontend for Achieve MVP. "+
 	"Achieve is a graph based project managment system " +
 	"that increases productivity amongst software teams "+
 	"by organizing a project into tasks, and showing each "+
-	"tasks dependancies in a graph to dispaly open and blocked tasks."
+	"tasks dependancies in a graph to dispaly open and blocked tasks.",
+	hint: "Designed Logo for local farm - Cheema Produce"
+
 }
 
 
 
 
-var projecets = [];
+export default [
+	perceive,
+	achieve,
+	weLift,
+	weBookRooms,
+	ballSorter,
+	hackathons,
+	freelancing,
+	cheemaProduce
+]

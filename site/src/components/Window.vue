@@ -10,7 +10,7 @@ export default {
 		position: {
 			type: Object,
 			required: false,
-			default: {x: 60, y:60}
+			default: {x: 0, y:0}
 		},
 		stateName: {
 			type: String,
@@ -41,7 +41,7 @@ export default {
 	methods: {
 		toggleFullscreen() {
 			this.fullScreen = !this.fullScreen;
-			this.setPosition(0, 0);
+			this.setPosition(0, 25);
 		},
 		close() {
 			this.$store.commit("close", this.stateName);
@@ -52,16 +52,17 @@ export default {
 				x = 0;
 				y = 0;
 			}
-
 			var parentWidth = this.$el.parentElement.offsetWidth;
 			var parentHeight = this.$el.parentElement.offsetHeight;
 			var width = this.$el.offsetWidth;
 			var height = this.$el.offsetHeight;
-			
-			x = x >= 0 ? x : 1;
-			y = y >= 0 ? y : 1;
-			x = x <= parentWidth - width ? x : parentWidth - width - 1;
-			y = y <= parentHeight - height ? y : parentHeight - height - 1;
+			var maxWidth = parentWidth - width;
+			var maxHeight = parentHeight - height;
+
+			x = x >= 0 ? x : 0;
+			y = y >= 0 ? y : 0;
+			x = x <= maxWidth ? x : maxWidth;
+			y = y <= maxHeight ? y : maxHeight;
 
 			this.$el.style.left = x + "px";
 			this.$el.style.top = y + "px";
@@ -116,12 +117,25 @@ export default {
 				document.onmouseup = null;
 				document.onmousemove = null;
 			}
+		},
+
+		myEventHandler() {
+			var {x, y} = this.getPosition();
+			this.setPosition(x, y);
 		}
 	},
 
 
 	mounted() {
 		this.dragElement(this.$el);
+	},
+	
+	created() {
+		// document.body.onresize = this.myEventHandler;
+		window.addEventListener("resize", this.myEventHandler);
+	},
+	destroyed() {
+		window.removeEventListener("resize", this.myEventHandler);
 	},
 
 };
@@ -159,8 +173,8 @@ export default {
 		overflow: hidden;
 		&.fullscreen {
 			width: 100%;
-			height: calc(100% - 65px);
-			position:fixed;
+			height: calc(100%);
+			position: absolute;;
 			top: 0px;
 			left: 0px;
 		}

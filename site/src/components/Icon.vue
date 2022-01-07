@@ -46,7 +46,7 @@ export default {
 			var parentWidth = this.$el.parentElement.offsetWidth;
 			var parentHeight = this.$el.parentElement.offsetHeight;
 			var width = this.$el.offsetWidth;
-			var height = this.$el.offsetHeight;
+			var height = this.$el.offsetHeight;// * 1.75;
 			// console.log("x " + x + ", y " +  y)
 			// console.log("width " + width + ", height" +  height)
 			x = x >= 0 ? x : 1;
@@ -107,9 +107,22 @@ export default {
 				document.onmouseup = null;
 				document.onmousemove = null;
 			}
-		}
+		},
+
+		myEventHandler() {
+			var {x, y} = this.getPosition();
+			this.setPosition(x, y);
+		},
 	},
 
+	created() {
+		if (!this.docked)
+			window.addEventListener("resize", this.myEventHandler);
+	},
+	destroyed() {
+		if (!this.docked)
+			window.removeEventListener("resize", this.myEventHandler);
+	},
 
 	mounted() {
 		if (!this.docked)
@@ -139,6 +152,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+#icon-text {
+	text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+
+}
 	#dot {
 		width: 6px;
 		height: 6px;

@@ -35,7 +35,7 @@ export default {
 <style scoped lang="scss">
 	
 	#dock {
-		position: absolute;
+		position: fixed;
 		width: 80%;
 		height: 70px;
 		background: rgba(109, 109, 109, 0.8);

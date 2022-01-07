@@ -9,7 +9,7 @@
 		<div class="bg-text">
 			<div id="profile-pic"></div>
 			<h1 id="name">Welcome Visitor</h1>
-			<router-link to="desktop" id="landing-page-button" class="button-white">Login</router-link>
+			<router-link to="desktop" id="landing-page-button" class="button-white">Continue!</router-link>
 		</div>
 
 	</div>

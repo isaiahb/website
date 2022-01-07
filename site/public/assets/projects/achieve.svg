@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="250" height="250" viewBox="0 0 250 250">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.02" y1="0.028" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#2350e5"/>
+      <stop offset="1" stop-color="#6ad7ff"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect width="136.078" height="116.587" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_20" data-name="Rectangle 20" width="101.533" height="116.492" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="achieve" transform="translate(-1219 -869)">
+    <rect id="Rectangle_56" data-name="Rectangle 56" width="250" height="250" rx="15" transform="translate(1219 869)" fill="url(#linear-gradient)"/>
+    <g id="Group_81" data-name="Group 81" transform="translate(-1.545 -6)">
+      <g id="Logo_4" data-name="Logo – 4" transform="translate(1233.545 942)" clip-path="url(#clip-path)">
+        <g id="Logo" transform="translate(0 0)">
+          <g id="Logo-2" data-name="Logo">
+            <rect id="Rectangle_25" data-name="Rectangle 25" width="136.078" height="116.493" fill="none"/>
+          </g>
+        </g>
+        <g id="Logo-3" data-name="Logo" transform="translate(0.208 0.095)" clip-path="url(#clip-path-2)">
+          <path id="Path_2" data-name="Path 2" d="M1649.028,606.976c-.643-4.2,42.407-111.585,42.407-111.585s38.73,91.724,33.04,97.8c-2.4,2.565-22.782-8.631-40.1-23.575-23.578-20.341-45.526-46.839-45.526-46.839l6.844-14.016s27.351,35.591,47.373,54.048a42.326,42.326,0,0,0,8.417,5.581c3.361,1.894,8.093,3.74,9.5,4.46,6.233.175-19.551-50.073-19.551-50.073s-5.671,20.717-10.332,34.239c-2.24,6.5-18.627,52.6-23.036,54.249S1649.668,611.178,1649.028,606.976Z" transform="translate(-1623.513 -495.391)" fill="#fffdf9"/>
+          <path id="Polygon_1" data-name="Polygon 1" d="M11.346,0,22.691,17.649H0Z" transform="translate(0 18.712) rotate(-48)" fill="#fffdf9"/>
+        </g>
+      </g>
+      <g id="Component_4" data-name="Component 4" transform="translate(1332.784 977.184)">
+        <text id="chieve" transform="translate(0 33)" fill="#fffdf9" font-size="43" font-family="Helvetica"><tspan x="0" y="0">chieve</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

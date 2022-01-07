@@ -1,26 +1,7 @@
 <script>
 import Window from "@/components/Window";
-var projects = [
-	"Perceive",
-	"Achieve",
-	"WE Lift",
-	"WE Book Rooms",
-	"Ball Sorter",
-	"Hackathons",
-	"Freelancing",
-	"Cheema Produce"
-]
-var projectz = [
-	{name: "Perceive"},
-	"Achieve",
-	"WE Lift",
-	"WE Book Rooms",
-	"Ball Sorter",
-	"Hackathons",
-	"Freelancing",
-	"Cheema Produce",
-]
 var url = "./assets/foldericon.svg";
+import projects from "../../models/projects";
 
 export default {
 	name: "Portfolio",
@@ -32,6 +13,9 @@ export default {
 			var {x, y} = {x: 60, y: 60};// = this.$store.state.portfolio;
 			console.log(x, y);
 			return {x, y};
+		},
+		img() {
+			return "assets/projects/" + this.selected.icon + ".svg";
 		}
 	},
 	data() {
@@ -39,9 +23,12 @@ export default {
 			title: "All Projects",
 			folderIcon: "'" + url + "'",
 			projects,
-			selected: "Perceive",
+			selected: {},
 			clicks: 0
 		}
+	},
+	mounted() {
+		this.select(projects[0]);
 	},
 	methods: {
 		select(project) {
@@ -91,9 +78,13 @@ export default {
 				<div id="title" class="w-100"><h6 class="title">{{title}}</h6></div>
 				<div class="w-100 h-100 flex">
 					<div id="project-list"> 
-						<div id="project" v-for="project in projects" :key="project"  @click="select(project)" :class="{ active: project == selected }">{{project}}</div>
+						<div id="project" v-for="project in projects" :key="project"  @click="select(project)" :class="{ active: project == selected }">{{project.name}}</div>
 					</div>
-					
+					<div id="project-info"> 
+						<img id="project-icon"  :src="img"/>
+						{{selected.hint}}
+					</div>
+					<!-- {{selected.info}} -->
 				</div>
 			</div>
 		</div>
@@ -118,8 +109,18 @@ $borderColor: #A7A6A7;
 #project-list {
 	width: 140px;
 	border-right: 1px solid $borderColor;
+	min-width: 140px;
 }
-
+#project-icon {
+	width:100px;
+	height:100px;
+}
+#project-info {
+	padding:10px;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
 .flex {
 	display:flex;
 }
