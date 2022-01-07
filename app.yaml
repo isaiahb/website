@@ -1,0 +1,19 @@
+runtime: nodejs14
+
+handlers:
+- url: /
+  static_files: site/dist/index.html
+  upload: site/dist/index.html
+  secure: always
+
+- url: /site/dist/(.*)
+  static_files: site/dist/\1
+  upload: site/dist/(.*)
+
+- url: /dist/(.*)
+  static_files: site/dist/\1
+  upload: site/dist/(.*)
+
+- url: /(.*)
+  static_files: site/dist/\1
+  upload: site/dist/(.*)
